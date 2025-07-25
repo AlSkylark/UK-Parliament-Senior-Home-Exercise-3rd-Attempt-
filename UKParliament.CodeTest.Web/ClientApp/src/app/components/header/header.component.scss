@@ -1,0 +1,63 @@
+@use "tokens" as t;
+@use "colours" as c;
+
+@import "bs-breakpoints";
+
+.wrapper {
+    a {
+        text-decoration: none;
+    }
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 3rem;
+        border-bottom: t.$limiter-border-style;
+        background-color: var(--colour-white);
+        color: var(--colour-black);
+        .logo {
+            margin: 0 30px;
+            color: var(--colour-purple);
+        }
+        .item {
+            border-left: none;
+            margin: 1rem;
+        }
+
+        @include media-breakpoint-up(sm) {
+            justify-content: space-between;
+            flex-wrap: wrap;
+            flex-direction: row;
+            margin-top: 0;
+            .item {
+                border-left: t.$limiter-border-style;
+                margin: 0;
+            }
+        }
+    }
+
+    .title {
+        padding: 2rem 3rem;
+        border-bottom: t.$limiter-border-style;
+        background-color: var(--colour-purple);
+        color: var(--colour-white);
+        button {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: var(--colour-purple);
+            color: var(--colour-white);
+            border: none;
+            &:focus {
+                @include t.focus-style(true);
+            }
+
+            i {
+                color: var(--colour-white);
+                font-size: 2.5rem;
+            }
+        }
+    }
+}

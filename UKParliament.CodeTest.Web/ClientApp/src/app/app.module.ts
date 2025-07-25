@@ -5,15 +5,24 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
+import { SkipComponent } from "./components/skip/skip.component";
+import { MainComponent } from './components/main/main.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-@NgModule({ declarations: [
+@NgModule({
+    declarations: [
         AppComponent,
-        HomeComponent
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+        BrowserAnimationsModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: '', component: HomeComponent, pathMatch: 'full' }
-        ])], providers: [provideHttpClient(withInterceptorsFromDi())] })
+            { path: '', component: MainComponent, pathMatch: 'full' }
+        ], { anchorScrolling: "enabled" }),
+        SkipComponent
+    ],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
 export class AppModule { }

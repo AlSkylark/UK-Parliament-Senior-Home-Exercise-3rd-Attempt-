@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="login-box">
+        <div class="title-wrap">
+            <h1 class="title">Sign in</h1>
+            <app-button
+                type="button"
+                class="theme"
+                aria-label="Colour theme"
+                (click)="toggleTheme()"
+            >
+                @if (isDarkMode) {
+                    <i class="bx bxs-sun"></i>
+                } @else {
+                    <i class="bx bxs-moon"></i>
+                }
+                Theme
+            </app-button>
+        </div>
+        <form (submit)="logIn($event)" class="login">
+            <app-textbox
+                [id]="'login'"
+                label="Login"
+                [(value)]="username"
+                [placeholder]="'You can enter anything you want'"
+            >
+            </app-textbox>
+            <app-textbox
+                [id]="'password'"
+                label="Password"
+                [placeholder]="'Same here!'"
+                [isPassword]="true"
+            >
+            </app-textbox>
+            <app-button type="submit" class="signin">Sign in</app-button>
+        </form>
+    </div>
+</div>

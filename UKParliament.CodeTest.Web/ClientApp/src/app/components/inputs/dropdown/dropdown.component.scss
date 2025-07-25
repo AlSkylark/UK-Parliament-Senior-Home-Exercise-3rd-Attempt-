@@ -1,0 +1,27 @@
+@use "tokens" as t;
+
+.wrapper {
+    height: 100%;
+    position: relative;
+
+    label {
+        color: var(--colour-black);
+        @include t.error-style-text;
+    }
+
+    select {
+        height: 100%;
+        width: 100%;
+        margin-top: 5px;
+        @include t.input-style;
+    }
+
+    .spinner {
+        position: absolute;
+        background-color: var(--colour-white);
+        border-radius: 50px;
+        right: 7px;
+        top: 25px;
+        font-size: xx-large;
+    }
+}

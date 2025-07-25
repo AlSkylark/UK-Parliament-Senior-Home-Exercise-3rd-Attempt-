@@ -1,0 +1,201 @@
+@use "tokens" as t;
+@use "colours" as c;
+
+@import "bs-breakpoints";
+
+/**
+possible statuses:
+normal
+manager
+inactive
+irregular (has no manager, pay, etc.)
+*/
+
+.container {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: t.$decoration-box-shadow;
+    padding: 10px;
+    height: 100%;
+    position: relative;
+    background-color: var(--colour-white);
+    color: var(--colour-black);
+
+    &.dark-mode {
+        border: 1px solid rgba(255, 255, 255, 0.308);
+        a {
+            color: var(--colour-purple-darker);
+        }
+        .info {
+            .name {
+                color: var(--colour-black);
+
+                .first-name {
+                    color: var(--colour-purple-darker);
+                }
+            }
+            .department {
+                color: var(--colour-grey-1);
+            }
+        }
+
+        &:has(.status.manager) {
+            .outer-border {
+                border-color: var(--colour-manager-dark);
+                .inner-border {
+                    border-color: var(--colour-manager-dark);
+                }
+            }
+            .info {
+                .name {
+                    color: var(--colour-white);
+                    .first-name {
+                        color: var(--colour-white);
+                    }
+                }
+                .department {
+                    color: var(--colour-white);
+                }
+            }
+        }
+
+        &:has(.status.irregular) {
+            a {
+                color: var(--colour-white);
+            }
+            .info {
+                .name {
+                    color: var(--colour-white);
+                    .first-name {
+                        color: var(--colour-white);
+                    }
+                }
+                .department {
+                    color: var(--colour-white);
+                }
+            }
+        }
+    }
+
+    .avatar {
+        z-index: 2;
+
+        .outer-border {
+            display: grid;
+            place-content: center;
+            width: 64px;
+            height: 64px;
+            border-radius: 50px;
+            border: t.$input-border-style;
+            border-width: 3px;
+            z-index: 2;
+            &.manager {
+                border-style: dashed;
+            }
+
+            .inner-border {
+                display: grid;
+                place-content: center;
+                width: 54px;
+                height: 54px;
+                border-radius: 50px;
+                border: t.$input-border-style;
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+        }
+    }
+
+    .info-wrapper {
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+
+        @include media-breakpoint-down(sm) {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr auto;
+        }
+
+        &.editor-open {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr auto;
+        }
+
+        .info {
+            .name {
+                font-size: 1.2rem;
+                color: var(--colour-purple);
+
+                .first-name {
+                    font-weight: 600;
+                    color: var(--colour-purple-lighter);
+                }
+                .manager {
+                    font-size: 1rem;
+                }
+            }
+            .department {
+                color: var(--colour-grey-1);
+            }
+        }
+
+        .profile {
+            width: 100%;
+        }
+    }
+
+    .status {
+        display: none;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        overflow: hidden;
+
+        i {
+            position: absolute;
+            right: 35%;
+            transform: rotate(-20deg) scale(20);
+        }
+
+        &.manager {
+            display: block;
+            background-color: var(--colour-manager-light);
+
+            i {
+                top: 46px;
+                right: 30%;
+                transform: rotate(-20deg) scale(17);
+                color: var(--colour-manager-dark);
+            }
+        }
+
+        &.inactive {
+            display: block;
+            background-color: var(--colour-inactive-light);
+
+            i {
+                color: var(--colour-inactive-dark);
+            }
+        }
+
+        &.irregular {
+            display: block;
+            background-color: var(--colour-warning-light);
+
+            i {
+                color: var(--colour-warning-dark);
+            }
+        }
+    }
+
+    &.selected {
+        @include t.focus-style;
+    }
+}

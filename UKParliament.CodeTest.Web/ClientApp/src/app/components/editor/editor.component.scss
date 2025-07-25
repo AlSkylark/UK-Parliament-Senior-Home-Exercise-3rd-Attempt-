@@ -1,0 +1,160 @@
+@use "tokens" as t;
+@use "colours" as c;
+
+@import "bs-breakpoints";
+
+$field-gaps: 1rem;
+
+.container {
+    padding: 10px;
+
+    button {
+        @include t.button-style;
+    }
+
+    .top-section {
+        display: flex;
+        flex-wrap: wrap-reverse;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2rem;
+        color: var(--colour-black);
+
+        .action-buttons {
+            display: flex;
+            gap: $field-gaps;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+        h2 {
+            font-size: 2rem;
+        }
+
+        .updated {
+            font-size: small;
+        }
+    }
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .profile-section {
+            display: flex;
+            gap: $field-gaps;
+
+            .other-details {
+                flex: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: $field-gaps;
+
+                .avatar {
+                    width: 150px;
+                    height: 150px;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .id {
+                    color: var(--colour-grey-2);
+                }
+            }
+            .details {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: $field-gaps;
+            }
+        }
+
+        .postcode-combi {
+            display: flex;
+            gap: $field-gaps;
+
+            .postcode-el {
+                flex: 0;
+                min-width: 150px;
+            }
+            .county-el {
+                flex: 1;
+                min-width: 150px;
+            }
+        }
+
+        .employment-dates {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: end;
+            gap: $field-gaps;
+
+            > * {
+                flex: 1;
+            }
+        }
+
+        .payment-section {
+            display: flex;
+            gap: $field-gaps;
+
+            .payband-el {
+                flex: 0;
+                min-width: 150px;
+            }
+            .salary-el {
+                flex: 1;
+                min-width: 150px;
+            }
+        }
+
+        .manager {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            .remove-manager {
+                justify-self: end;
+            }
+        }
+
+        .employee-toggle {
+            display: flex;
+            flex-direction: column;
+
+            gap: $field-gaps;
+
+            .employee-list {
+                display: flex;
+                flex-direction: column;
+                max-height: 400px;
+                overflow-y: scroll;
+            }
+        }
+
+        .bottom-section {
+            margin-top: $field-gaps;
+            align-self: center;
+            .submit {
+                display: flex;
+
+                .cancel {
+                    margin-left: $field-gaps;
+                }
+            }
+        }
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .container {
+        padding: 2rem;
+        .top-section {
+            justify-content: space-between;
+        }
+    }
+}

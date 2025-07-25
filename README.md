@@ -1,19 +1,20 @@
-# UK Parliament - Product Team Home Exercise for Senior Developer
+#    Welcome to the Parliament's brand new HR Management System
 
-## Dependencies
-Please ensure you have the following installed:
-* .NET 8 SDK (you may need to ensure your Visual Studio installation is fully up to date)
-* Node v20.16.0 LTS
+## More powered than ever!
 
-## Introduction
+Following from the work in my last take home test (which can be found [here](https://github.com/AlSkylark/UK-Parliament-Senior-Home-Exercise)) I've improved significantly the look, performance and usability of the entire application. With special care taken to, this time, fulfill ALL criteria to a higher degree.
 
-Thanks for doing our recruitment home exercise. We have written a template solution for you, to save you from having to do too much setup.
+To summarise here's a list of changes from the previous iteration:  
+* Refactors the Angular `EmployeeService` to not be tightly coupled with the editor's visibility. 
+* Adds fully functional create feature. *(Somehow this was missing!?)*
+* Adds managerial details to both Employees AND Managers, with the ability to remove an assigned manager from an Employee and to list a Manager's managed employees.
+* Adds a Dark mode and a `ThemingService` to toggle between the two. 
+* Adds a small alerting service that shows when an employee is saved, created or deleted, or if the operation errored.
+* Increases code coverage with a set of integration tests for the Employee CRUD features. 
+* Increases code coverage for Angular components, fixes all Jasmine/Karma tests to pass and adds a couple of example tests as well as exhaustive tests on the `Utility` classes.
+* Small tweaks on the UI to improve styling and design, including a mock "Sign in" welcome screen and other such details.
+* Takes OUT FluentAssertions owed to their change in licensing. 
 
-* Clone this repository, and open the solution
-* Set **UKParliament.CodeTest.Web** as the startup project
-* Build and run it (NPM should install all the dependencies automatically)
-* Instructions have been provided for you within the solution and these will display on the home page. The home page also shows the assessment criteria for the test. **You should aim to satisfy all points on it.**
-
-## Submitting your test
-* After you have complete this test please host your solution on GitHub (or another git based hosting platform)
-* Provide us with a link so we can clone your solution
+### Notes on running tests
+To run the new Jasmine/Karma tests you need to `cd` into `UkParliament.CodeTest.Web/ClientApp` and manually run the `npm run test` command.  
+This will open a new browser where the tests should appear and automatically run.

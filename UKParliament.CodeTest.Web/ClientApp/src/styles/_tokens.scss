@@ -1,0 +1,161 @@
+$font-size-big: 1.1rem;
+$font-size-bigger: 1.2rem;
+
+$limiter-border-style: 2px solid var(--colour-purple);
+$limiter-border-style-slim: 1px solid var(--colour-purple);
+
+$input-border-style: 2px solid var(--colour-purple);
+$input-border-style-lighter: 1px solid var(--colour-purple-lighter);
+$input-padding-style: 1rem;
+
+$focus-border-style: 2px solid var(--colour-purple);
+$focus-box-shadow-style:
+    0 0 0 2px var(--colour-white),
+    0 0 0 5px var(--colour-purple);
+$focus-box-shadow-style-triple:
+    0 0 0 2px var(--colour-purple),
+    0 0 0 4px var(--colour-white),
+    0 0 0 6px var(--colour-purple);
+
+$focus-box-shadow-style-error:
+    0 0 0 2px var(--colour-white),
+    0 0 0 5px var(--colour-error-dark);
+
+$decoration-box-shadow: 0 2px 5px 1px rgba(129, 129, 129, 0.63);
+
+@mixin focus-style($emphasis: false) {
+    outline: 2px transparent;
+    border-radius: 0;
+    @if ($emphasis) {
+        box-shadow: $focus-box-shadow-style-triple;
+    } @else {
+        box-shadow: $focus-box-shadow-style;
+
+        &.has-errors {
+            box-shadow: $focus-box-shadow-style-error;
+        }
+    }
+}
+
+@mixin input-style {
+    padding: 10px;
+    border: $input-border-style;
+    border-radius: 0;
+    height: 100%;
+    max-height: 46px;
+    font-size: medium;
+    font-size: $font-size-big;
+    background-color: var(--colour-white);
+    color: var(--colour-black);
+
+    @include error-style;
+
+    &:disabled {
+        background-color: var(--colour-grey-2);
+        border-color: var(--colour-grey-1);
+        color: var(--colour-grey-3);
+        cursor: default;
+    }
+
+    &:focus {
+        @include focus-style;
+    }
+}
+
+@mixin error-style {
+    &.has-errors,
+    .has-errors {
+        border: 2px solid var(--colour-error-dark);
+    }
+
+    &.has-warnings,
+    .has-warnings {
+        border: 2px solid var(--colour-warning-text);
+    }
+}
+
+@mixin error-style-text {
+    &.has-errors,
+    .has-errors {
+        color: var(--colour-error-dark);
+    }
+
+    &.has-warnings,
+    .has-warnings {
+        color: var(--colour-warning-text);
+    }
+}
+
+@mixin button-style {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    max-height: 46px;
+    width: 100%;
+    height: 100%;
+    font-size: $font-size-big;
+    padding: 10px;
+    cursor: pointer;
+    border: $input-border-style;
+    color: var(--colour-white);
+    background-color: var(--colour-purple);
+
+    &:disabled {
+        background-color: var(--colour-grey-2);
+        border-color: var(--colour-grey-1);
+        color: var(--colour-grey-3);
+        cursor: default;
+    }
+
+    &:hover:not(:disabled) {
+        background-color: var(--colour-purple-lighter);
+    }
+
+    &:active:not(:disabled) {
+        background-color: var(--colour-purple-darker);
+    }
+
+    &:focus:not(:disabled) {
+        @include focus-style;
+    }
+}
+
+@mixin filter-item-style {
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    color: var(--colour-black);
+    font-size: $font-size-big;
+    border-bottom: 2px solid transparent;
+
+    &:focus {
+        @include focus-style(true);
+    }
+
+    &:hover {
+        border-bottom: $input-border-style;
+    }
+}
+
+@mixin input-base {
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        &:has(label) {
+            gap: 5px;
+        }
+
+        label {
+            color: var(--colour-black);
+            @include error-style-text;
+        }
+
+        .input {
+            height: 100%;
+            width: 100%;
+            @include input-style;
+        }
+    }
+}

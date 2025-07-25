@@ -1,0 +1,96 @@
+@use "tokens" as t;
+
+@import "bs-breakpoints";
+
+.container {
+    display: flex;
+    justify-content: center;
+    row-gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .create {
+        align-self: start;
+        display: flex;
+        margin: 0 10px;
+        gap: 10px;
+
+        .or {
+            color: var(--colour-black);
+            align-self: center;
+            text-align: center;
+            font-size: t.$font-size-big;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        .search {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            margin: 0 0 10px 0;
+
+            .input {
+                display: grid;
+                grid-auto-flow: column;
+                grid-template-columns: 1fr auto;
+                width: auto;
+
+                .search-button {
+                    .search-button-text {
+                        display: none;
+                    }
+                }
+            }
+
+            .filter-button {
+                align-self: center;
+                margin: 10px;
+                @include t.filter-item-style;
+                display: none;
+            }
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+
+            &.hidden:not(.editor-open) {
+                display: flex;
+                @include media-breakpoint-up(sm) {
+                    display: none !important;
+                }
+            }
+
+            .reset-button {
+                @include t.filter-item-style;
+            }
+        }
+
+        @include media-breakpoint-up(sm) {
+            .search:not(.editor-open) {
+                width: 100%;
+                .input {
+                    width: min(90vw, 50vw);
+                    .search-button {
+                        .search-button-text {
+                            display: flex;
+                        }
+                    }
+                }
+                .filter-button {
+                    display: flex;
+                }
+            }
+        }
+    }
+}
