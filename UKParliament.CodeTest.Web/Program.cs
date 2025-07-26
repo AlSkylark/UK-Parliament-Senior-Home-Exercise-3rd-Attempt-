@@ -1,10 +1,12 @@
+using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using CommissionMe.API.Infrastructure.Database;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 using UKParliament.CodeTest.Data;
+using UKParliament.CodeTest.Services.Services;
+using UKParliament.CodeTest.Services.Services.Interfaces;
 
 namespace UKParliament.CodeTest.Web;
 
@@ -44,8 +46,13 @@ public class Program
             containerBuilder
                 .RegisterAssemblyTypes([.. assemblies])
                 .Where(t => t.GetConstructors().Any(c => c.IsPublic))
+                .Except<AvatarService>()
                 .AsImplementedInterfaces();
         });
+
+        builder.Services.AddHttpClient<IAvatarService, AvatarService>(c =>
+            c.BaseAddress = new Uri("https://api.dicebear.com/9.x/personas/png")
+        );
 
         var app = builder.Build();
 

@@ -13,10 +13,7 @@
             <i class="bx bxs-chevron-down"></i>
             <div class="info">{{ username }}</div>
             <div class="avatar">
-                <img
-                    src="https://avatar.iran.liara.run/public"
-                    alt="Random avatar"
-                />
+                <img src="/api/avatar/{{ username }}" alt="Random avatar" />
             </div>
         </button>
         @if (isOpen) {

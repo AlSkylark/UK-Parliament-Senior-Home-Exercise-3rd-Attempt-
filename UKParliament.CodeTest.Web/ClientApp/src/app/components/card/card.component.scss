@@ -98,6 +98,7 @@ irregular (has no manager, pay, etc.)
             .inner-border {
                 display: grid;
                 place-content: center;
+                overflow: hidden;
                 width: 54px;
                 height: 54px;
                 border-radius: 50px;

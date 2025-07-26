@@ -114,7 +114,7 @@ export class EditorComponent implements OnDestroy {
       return;
     }
 
-    this.nonReactiveName = this.selectedEmployee.data.firstName;
+    this.nonReactiveName = this.selectedEmployee.data.firstName + "" + this.selectedEmployee.data.lastName;
 
     this.link = this.selectedEmployee.links.find(l => l.rel === "self");
   }
