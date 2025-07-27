@@ -1,6 +1,6 @@
-#    Welcome to the Parliament's brand new HR Management System
+#    Welcome to the Parliament's HR Management System
 
-## More powered than ever!
+## Now with 10% more power!
 
 Following from the work in my last two attempts I've made some minor improvements and added a feature that I had no time to finish on the last attempt.
 
