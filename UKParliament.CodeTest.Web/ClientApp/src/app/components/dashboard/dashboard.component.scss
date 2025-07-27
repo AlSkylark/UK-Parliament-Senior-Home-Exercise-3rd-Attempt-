@@ -9,9 +9,11 @@
     background-color: var(--colour-white);
 
     #main.wrapper {
+        flex: 1;
         display: grid;
         align-self: center;
         max-width: 1400px;
+        width: 100%;
 
         &.editor-open {
             grid-template-columns: 1fr;

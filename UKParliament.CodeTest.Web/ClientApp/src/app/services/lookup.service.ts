@@ -3,6 +3,8 @@ import { Inject, Injectable } from '@angular/core';
 import { LookupItem } from '../models/lookup-item';
 import { Subject } from 'rxjs';
 import { LookupItemsEnum } from '../models/lookup-items-enum';
+import { Department } from '../models/department';
+import { PayBand } from '../models/payband';
 
 /**
  * This service keeps track of the LookupItems available for the main filters.
@@ -96,5 +98,29 @@ export class LookupService {
 
     this.populateLookupItem(item, loadedItem);
     return false;
+  }
+
+  public getDepartmentsForEdit() {
+    return this.http.get<Department[]>(this.baseUrl + "api/lookup/departments");
+  }
+
+  public getPayBandsForEdit() {
+    return this.http.get<PayBand[]>(this.baseUrl + "api/lookup/paybands");
+  }
+
+  public editDepartment(id: number, update: Department) {
+    return this.http.put<Department>(this.baseUrl + `api/lookup/departments/${id}`, update);
+  }
+
+  public editPayBand(id: number, update: PayBand) {
+    return this.http.put<PayBand>(this.baseUrl + `api/lookup/paybands/${id}`, update);
+  }
+
+  public addDepartment(update: Department) {
+    return this.http.post<Department>(this.baseUrl + "api/lookup/departments", update);
+  }
+
+  public addPayBand(update: PayBand) {
+    return this.http.post<PayBand>(this.baseUrl + "api/lookup/paybands", update);
   }
 }

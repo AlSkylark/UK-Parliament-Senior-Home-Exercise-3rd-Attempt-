@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ThemeService } from 'src/app/services/theme.service';
 import { UserService } from 'src/app/services/user.service';
@@ -11,6 +11,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrl: './navigation.component.scss'
 })
 export class NavigationComponent implements OnDestroy {
+  adminPanelClicked = output();
+
   @HostListener('document:click', ['$event'])
   clickout(event: Event) {
     if (!this.menuRef.nativeElement.contains(event.target)) {
@@ -47,8 +49,8 @@ export class NavigationComponent implements OnDestroy {
     this.themeService.changeTheme();
   }
 
-  sendAlert() {
-    window.alert("This was a 'If I have time' feature I wanted to add, it was going to be an editor for the 'admin items' like departments and paybands. Maybe next time I'll add it... Hopefully there is no next time though lol!")
+  openAdminPanel() {
+    this.adminPanelClicked.emit();
   }
 
 

@@ -24,14 +24,24 @@ public class LookUpService(
         return await payBandRepo.GetById(id);
     }
 
-    public IEnumerable<Department> SearchDepartments(string? name)
+    public IEnumerable<Department> SearchDepartments(string? name, bool orderById = false)
     {
-        return SearchLookupItem(name, departmentRepo);
+        return SearchLookupItem(name, departmentRepo, orderById);
     }
 
-    public IEnumerable<PayBand> SearchPayBands(string? name)
+    public IEnumerable<PayBand> SearchPayBands(string? name, bool orderById = false)
     {
-        return SearchLookupItem(name, payBandRepo);
+        return SearchLookupItem(name, payBandRepo, orderById);
+    }
+
+    public async Task<Department> EditDepartment(int id, Department update)
+    {
+        return await EditLookupItem(id, update, departmentRepo);
+    }
+
+    public async Task<PayBand> EditPayBand(int id, PayBand update)
+    {
+        return await EditLookupItem(id, update, payBandRepo);
     }
 
     public IEnumerable<string> GetLookupItems()
@@ -60,7 +70,11 @@ public class LookUpService(
         };
     }
 
-    private static IEnumerable<T> SearchLookupItem<T>(string? name, ILookupRepository<T> repo)
+    private static IEnumerable<T> SearchLookupItem<T>(
+        string? name,
+        ILookupRepository<T> repo,
+        bool orderById = false
+    )
         where T : BaseEntity, ILookupItem
     {
         var items = repo.Search();
@@ -72,6 +86,26 @@ public class LookUpService(
             );
         }
 
-        return items.OrderBy(i => i.Name).AsEnumerable();
+        if (!orderById)
+        {
+            items = items.OrderBy(i => i.Name);
+        }
+        else
+        {
+            items = items.OrderBy(i => i.Id);
+        }
+
+        return items.AsEnumerable();
+    }
+
+    private static async Task<T> EditLookupItem<T>(int id, T update, ILookupRepository<T> repo)
+        where T : BaseEntity, ILookupItem
+    {
+        if (id == 0)
+        {
+            return await repo.Create(update);
+        }
+
+        return await repo.Update(update);
     }
 }

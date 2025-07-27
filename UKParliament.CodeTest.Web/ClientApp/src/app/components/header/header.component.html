@@ -29,7 +29,9 @@
             </svg>
         </a>
         <div class="item">
-            <app-navigation></app-navigation>
+            <app-navigation
+                (adminPanelClicked)="forwardAdminClick()"
+            ></app-navigation>
         </div>
     </div>
 

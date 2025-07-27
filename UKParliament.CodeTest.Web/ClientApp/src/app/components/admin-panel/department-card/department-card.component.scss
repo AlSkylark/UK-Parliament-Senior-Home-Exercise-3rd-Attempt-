@@ -1,0 +1,38 @@
+.card {
+    padding: 20px;
+    border: 1px solid var(--colour-black);
+    color: var(--colour-grey-2);
+    position: relative;
+
+    .id {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 5px;
+        font-size: small;
+        font-style: italic;
+    }
+
+    .details {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+        .info {
+            flex: 1 1 200px;
+        }
+        .actions {
+            align-self: end;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+    }
+
+    .timestamps {
+        font-style: italic;
+        font-size: small;
+        display: flex;
+        gap: 20px;
+    }
+}

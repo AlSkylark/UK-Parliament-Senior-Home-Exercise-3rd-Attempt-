@@ -1,23 +1,31 @@
 <div class="container">
     <div class="header">
-        <app-header></app-header>
+        <app-header
+            (adminPanelClicked)="onAdminPanelClicked($event)"
+        ></app-header>
     </div>
-    <section class="wrapper" id="main" [class.editor-open]="editorOpen">
-        <div class="search-section">
-            <div class="search">
-                <app-search></app-search>
-            </div>
-            <div class="results">
-                <app-result-list></app-result-list>
-            </div>
-        </div>
 
-        @if (editorOpen) {
-            <div class="editor">
-                <app-editor></app-editor>
+    <section class="wrapper" id="main" [class.editor-open]="editorOpen">
+        @if (adminPanelOpen()) {
+            <app-admin-panel (exit)="closeAdminPanel()"></app-admin-panel>
+        } @else {
+            <div class="search-section">
+                <div class="search">
+                    <app-search></app-search>
+                </div>
+                <div class="results">
+                    <app-result-list></app-result-list>
+                </div>
             </div>
+
+            @if (editorOpen) {
+                <div class="editor">
+                    <app-editor></app-editor>
+                </div>
+            }
         }
     </section>
+
     <div class="footer">
         <app-footer></app-footer>
     </div>

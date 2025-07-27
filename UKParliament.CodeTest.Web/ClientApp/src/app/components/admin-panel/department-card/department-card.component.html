@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="id">{{ item().id ? item().id : "new" }}</div>
+    <div class="details">
+        <div class="info">
+            <app-textbox
+                [id]="'name' + item().id + index()"
+                label="Name"
+                [(value)]="item().name"
+            ></app-textbox>
+        </div>
+        <div class="actions">
+            <app-button type="button" class="save" (click)="onSave()">
+                <i class="bx bx-save"></i>
+                Save
+            </app-button>
+            @if (!item().id) {
+                <app-button type="button" class="delete" (click)="onDelete()">
+                    <i class="bx bx-trash"></i>
+                    Delete
+                </app-button>
+            }
+        </div>
+    </div>
+    <div class="timestamps">
+        <div class="created">
+            Created on {{ item().createdAt | date: "medium" }}
+        </div>
+        <div class="updated">
+            Updated on {{ item().updatedAt | date: "medium" }}
+        </div>
+    </div>
+</div>

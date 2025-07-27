@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { NavigationComponent } from "../navigation/navigation.component";
 import { EmployeeService } from 'src/app/services/employee.service';
 import { EditorService } from 'src/app/services/editor.service';
@@ -12,11 +12,17 @@ import { EditorService } from 'src/app/services/editor.service';
 })
 export class HeaderComponent {
 
+  adminPanelClicked = output<boolean>();
+
   constructor(private employeeService: EmployeeService, private editorService: EditorService) { }
 
   toMainPage() {
+    this.adminPanelClicked.emit(false);
     this.editorService.closeEditor();
     this.employeeService.unsetEmployee();
   }
 
+  forwardAdminClick() {
+    this.adminPanelClicked.emit(true);
+  }
 }

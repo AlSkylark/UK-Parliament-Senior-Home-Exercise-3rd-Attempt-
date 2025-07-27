@@ -1,0 +1,34 @@
+.wrapper {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    color: var(--colour-black);
+    gap: 20px;
+
+    .title-wrapper {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .actions {
+        align-self: center;
+        display: flex;
+        gap: 20px;
+    }
+}
+
+.editor {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    color: var(--colour-black);
+
+    .card-list {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

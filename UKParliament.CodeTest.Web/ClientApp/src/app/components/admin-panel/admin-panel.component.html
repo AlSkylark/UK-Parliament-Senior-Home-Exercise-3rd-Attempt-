@@ -1,0 +1,73 @@
+<div class="wrapper">
+    <div class="title-wrapper">
+        <h1>Admin panel</h1>
+
+        <app-button type="button" (click)="exitAdmin()">
+            <i class="bx bx-exit"></i>
+            Exit
+        </app-button>
+    </div>
+    <h2>What item would you like to modify?</h2>
+
+    <div class="actions">
+        <app-button
+            type="button"
+            (click)="changeChoice(AdminItems.Departments)"
+        >
+            Departments
+        </app-button>
+        <app-button type="button" (click)="changeChoice(AdminItems.PayBands)">
+            Pay Bands
+        </app-button>
+    </div>
+</div>
+@if (choice()) {
+    <hr />
+    <div class="editor">
+        @switch (choice()) {
+            @case (AdminItems.Departments) {
+                <h1>Edit Departments</h1>
+                <div class="card-list">
+                    @for (item of $data() | async; track $index) {
+                        <app-department-card
+                            [item]="item"
+                            [index]="$index"
+                            (saveItem)="onSaveDepartment($event)"
+                        ></app-department-card>
+                    }
+                    @for (item of newItems(); track $index) {
+                        <app-department-card
+                            [item]="item"
+                            [index]="$index"
+                            (saveItem)="onSaveDepartment($event)"
+                            (deleteItem)="onDeleteItem($event)"
+                        ></app-department-card>
+                    }
+                </div>
+            }
+            @case (AdminItems.PayBands) {
+                <h1>Edit Pay Bands</h1>
+                <div class="card-list">
+                    @for (item of $data() | async; track $index) {
+                        <app-payband-card
+                            [item]="item"
+                            [index]="$index"
+                            (saveItem)="onSavePayband($event)"
+                            (deleteItem)="onDeleteItem($event)"
+                        ></app-payband-card>
+                    }
+                    @for (item of newItems(); track $index) {
+                        <app-payband-card
+                            [item]="item"
+                            [index]="$index"
+                            (saveItem)="onSavePayband($event)"
+                            (deleteItem)="onDeleteItem($event)"
+                        ></app-payband-card>
+                    }
+                </div>
+            }
+        }
+        <app-button type="button" (click)="addNew()"> Add </app-button>
+        <app-editor-alert></app-editor-alert>
+    </div>
+}
